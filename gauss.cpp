@@ -59,8 +59,7 @@ std::vector <double> gauss::lesSol(std::vector<std::vector<double>> matrix, std:
     for (iter = matrix.size() - 1; iter >= 0; --iter)
     {
         res[iter] = koef[iter];
-        for (int i = 0; i < iter; i++)
-        koef[i] -= matrix.at(i)[iter] * res[iter];
+        for (int i = 0; i < iter; i++) koef[i] -= matrix.at(i)[iter] * res[iter];
     }
     return res;
 }
