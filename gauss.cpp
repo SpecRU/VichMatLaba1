@@ -3,6 +3,8 @@
 gauss::gauss(){
 }
 
+//https://prog-cpp.ru/gauss/
+
 std::vector <double> gauss::lesSol(std::vector<std::vector<double>> matrix, std::vector <double> koef)
 {
     std::vector <double> res;
@@ -58,9 +60,10 @@ std::vector <double> gauss::lesSol(std::vector<std::vector<double>> matrix, std:
     // обратная подстановка
     for (int i = matrix.size() - 1; i >= 0; --i)
     {
-        res[i] = koef[i];
-        for (int k = 0; k < i; k++) koef[k] -= matrix.at(k)[i] * res[i];
-    }
+        res[i] = koef[i]; // последний коффициент в ответ
+        //вычитание известной переменной из остальных коффициентов
+        for (int k = 0; k < i; k++) koef[k] -= matrix.at(k)[i] * res[i]; 
+    }   
     return res;
 }
 
