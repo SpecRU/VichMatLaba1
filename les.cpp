@@ -1,6 +1,6 @@
 #include "les.h"
 
-les::les(int a, int b, std::string path)
+les::les(int a, std::string path)
 {
 	std::ifstream inp(path);
 	matrix.resize(a);
@@ -8,7 +8,7 @@ les::les(int a, int b, std::string path)
 
 	if (inp.is_open()) {
 		for (int i = 0; i < a; ++i) {
-			for (int k = 0; k < b; ++k) {
+			for (int k = 0; k < a; ++k) {
 				inp >> dtmp;
 				matrix.at(i).push_back(dtmp);
 			}
