@@ -56,10 +56,10 @@ std::vector <double> gauss::lesSol(std::vector<std::vector<double>> matrix, std:
         iter++;
     }
     // обратная подстановка
-    for (iter = matrix.size() - 1; iter >= 0; --iter)
+    for (int i = matrix.size() - 1; i >= 0; --i)
     {
-        res[iter] = koef[iter];
-        for (int i = 0; i < iter; i++) koef[i] -= matrix.at(i)[iter] * res[iter];
+        res[i] = koef[i];
+        for (int k = 0; k < i; k++) koef[k] -= matrix.at(k)[i] * res[i];
     }
     return res;
 }
