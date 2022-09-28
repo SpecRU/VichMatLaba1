@@ -6,7 +6,8 @@
 
 class gauss {
 public:
-	gauss();
+	gauss() = default;
+	std::vector <double> lesIterSol(std::vector<std::vector<double>> matrix, std::vector<double> koef);
 	std::vector <double> lesSol(std::vector<std::vector<double>> matrix, std::vector<double> koef);
 	void lesOut(std::vector<double> res, std::string path);
 };
