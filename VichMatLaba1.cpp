@@ -4,7 +4,7 @@
 int main()
 {
     setlocale(LC_ALL, "Russian");
-
+    //https://www.youtube.com/watch?v=l0DG4keob-8
     les a(5, "input.txt");
     a.lesOut("output.txt");
     gauss b;
