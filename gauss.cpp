@@ -1,50 +1,44 @@
 #include "gauss.h"
 
-std::vector<double> gauss::lesIterSol(std::vector<std::vector<double>> matrix, std::vector<double> koef)
-{
-    //https://ru.stackoverflow.com/questions/1040332/Метод-итераций-вычисления-СЛАУ-объяснение-реализации-алгоритма
-    const double acc = 0.000001;
-    double x[matrix.size()];
-    double x0[matrix.size()];
-    double E[matrix.size()];
-    double max = 0;
+std::vector <double> gauss::lesIterSol(std::vector<std::vector<double>> matrix, std::vector<double> koef) {
+    std::vector <double> res, Xn;
+    Xn.resize(matrix.size());
+    double acc = 0.0001;
 
-    for (int i = 0; i < matrix.size(); i++)
-        x0[i] = koef[i];
-    int counter = 0;
-    do
-    {
-        for (int i = 0; i < matrix.size(); i++)
-        {
-            x[i] = 0;
-            for (int j = 0; j < matrix.size(); j++)
-            {
-                x[i] += matrix.at(i)[j] * x0[j];
+    for (int i = 0; i < matrix.size(); ++i) res.push_back(koef[i] / matrix.at(i)[i]);
+
+    do {
+        for (int i = 0; i < matrix.size(); ++i) {
+            Xn[i] = koef[i] / matrix.at(i)[i];
+            for (int j = 0; j < matrix.size(); ++j) {
+                if (i == j) continue;
+                else Xn[i] -= matrix.at(i)[j] / matrix.at(i)[i] * res[j];
             }
-            x[i] += koef[i];
-            E[i] = fabs(x[i] - x0[i]);
         }
-        max = 0;
-        int i;
-        for (i = 0; i < matrix.size(); i++)
-        {
-            if (max < E[i]) max = E[i];
-            x0[i] = x[i];
+
+        bool flag = true;
+        for (int i = 0; i < matrix.size() - 1; ++i) {
+            if (abs(Xn[i] - res[i]) > acc) {
+                flag = false;
+                break;
+            }
         }
-        counter++;
-    } while (max > acc);
-    for (int i = 0; i < matrix.size(); i++)
-        std::cout << "x" << i + 1 << "=" << x[i] << " " << std::endl;
+
+        for (int i = 0; i < matrix.size(); ++i) res[i] = Xn[i];
+
+    if (flag) break;
+    } while (true);
+    return res;
 }
 
-std::vector <double> gauss::lesSol(std::vector<std::vector<double>> matrix, std::vector <double> koef)
+std::vector<double> gauss::lesGaussSol(std::vector<std::vector<double>> matrix, std::vector<double> koef)
 {
     std::vector <double> res;
     res.resize(matrix.size());
 
     int lpos, iter = 0;
     double max;
-    const double acc = 0.000001;
+    const double acc = 0.0001;
     while (iter < matrix.size())
     {
         max = abs(matrix.at(iter)[iter]);

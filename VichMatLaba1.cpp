@@ -5,8 +5,8 @@ int main()
 {
     setlocale(LC_ALL, "Russian");
 
-    les a(3, "input.txt");
+    les a(5, "input.txt");
     a.lesOut("output.txt");
     gauss b;
-    b.lesOut(b.lesSol(a.matrixOut(), a.koefOut()), "output.txt");
+    b.lesOut(b.lesIterSol(a.matrixOut(), a.koefOut()), "output.txt");
 }
